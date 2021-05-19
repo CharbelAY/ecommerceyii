@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+  php-apache:
+    container_name: yiitraining-php-apache
+    build:
+      context: .
+      dockerfile: php-apache.Dockerfile
+    ports:
+    - 8085:80
+    volumes:
+      - src:/var/www/ecomerceapp/public_html
+      - apacheconf:/etc/apache2
+    networks:
+      - main-network
+    command: bash -c "chmod +x /initialization/init.sh && /initialization/init.sh"
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+    - 3307:3306
+    networks:
+      - main-network
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8086:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - main-network
+
+volumes:
+  src:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./src
+  apacheconf:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./apacheconf
+
+
+networks:
+  main-network:
+    driver: bridge
