@@ -24,6 +24,8 @@ services:
     - 3307:3306
     networks:
       - main-network
+    volumes:
+    - dbvolume:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
@@ -48,6 +50,12 @@ volumes:
       type: none
       o: bind
       device: ./apacheconf
+  dbvolume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./dbvolume
 
 
 networks:

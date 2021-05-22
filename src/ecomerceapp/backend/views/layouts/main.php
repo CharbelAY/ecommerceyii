@@ -42,7 +42,7 @@ AppAsset::register($this);
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href=<?= yii\helpers\Url::to(["/product/index"])?>>
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Products</span></a>
         </li>
@@ -281,7 +281,9 @@ AppAsset::register($this);
             <!-- End of Topbar -->
 
 
-            <?= $content ?>
+            <div class="" style="padding: 5px 100px;">
+                <?= $content ?>
+            </div>
 
 
         </div>

@@ -25,6 +25,13 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+    /*
+     * @var \yii\web\UploadedFile
+     */
+    public $imageFile;
+
+
     /**
      * {@inheritdoc}
      */
@@ -39,9 +46,10 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'status'], 'required'],
+            [['name', 'price', 'status','image'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
+            [['imageFile','image','extensions'=>'png , jpg'],'maxSize'=>5*1024*1024],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 2000],
@@ -59,9 +67,10 @@ class Product extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
-            'image' => 'Image',
+            'image' => 'Product Image',
+            'imageFile'=>'Image File',
             'price' => 'Price',
-            'status' => 'Status',
+            'status' => 'Published',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
