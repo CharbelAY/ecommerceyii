@@ -13,6 +13,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'formatter'=>[
+            'currencyCode'=>'$'
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
