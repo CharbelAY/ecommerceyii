@@ -24,7 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            [
+                'attribute' => 'id',
+                'contentOptions'=>['style'=>'width:100px']
+            ],
             'name',
             [
                 'attribute' => 'image',
@@ -45,7 +48,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['datetime'],
                 'contentOptions' => ['style' => 'white-space: nowrap']
             ],
-            'updated_at:datetime',
+            [
+                'attribute' => 'updated_at',
+                'format' => ['datetime'],
+                'contentOptions' => ['style' => 'white-space: nowrap']
+            ],
             //'created_by',
             //'updated_by',
 
