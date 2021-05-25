@@ -6,6 +6,16 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
+    <?= \app\widgets\ButtonWidget::widget([
+            'text'=>'submit'
+    ]) ?>
+
+    <?php \app\widgets\BgWidget::begin([
+            'bgColor'=>'green'
+    ])?>
+        Hello my friends
+    <?php \app\widgets\BgWidget::end()?>
+
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
