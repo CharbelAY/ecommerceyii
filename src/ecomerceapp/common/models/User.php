@@ -22,6 +22,8 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property UserAddress[] $addresses
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -30,6 +32,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+
+    public string $password='';
+    public string $passwordConfirm='';
 
     /**
      * {@inheritdoc}
@@ -217,5 +222,16 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getDisplayName(){
         return $this->username;
+    }
+
+    public function getAddresses(){
+        return $this->hasMany(UserAddress::class,['user_id'=>'id']);
+    }
+
+    public function getAddress():?UserAddress
+    {
+        $address =  $this->addresses[0]?? new UserAddress();
+        $address->user_id = $this->id;
+        return $address;
     }
 }

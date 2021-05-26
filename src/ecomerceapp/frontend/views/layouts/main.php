@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -42,14 +43,29 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = [
+            'label' => Yii::$app->user->identity->getDisplayName(),
+            'options'=>[
+                    "dropDownOptions"=>"dropdown-menu-right"
+            ],
+//            'url' => ['/site/logout'],
+//            "linkOptions" => [
+//                'data-method' => 'post'
+//            ],
+            'items' => [
+                [
+                    'label' => 'logout',
+                    'url' => ['/site/logout'],
+                    "linkOptions" => [
+                        'data-method' => 'post'
+                    ]
+                ],
+                [
+                    'label' => 'profile',
+                    'url' => ['/site/profile']
+                ]
+            ]
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav ml-auto '],
