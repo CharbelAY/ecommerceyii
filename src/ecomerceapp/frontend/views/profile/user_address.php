@@ -11,21 +11,18 @@ use yii\bootstrap4\ActiveForm;
 ?>
 
 
-<?php \yii\widgets\Pjax::begin([
-    'enablePushState'=>false
-]) ?>
 
-<?php if (isset($success) && $success):?>
-<div class="alert alert-success">
-    Address was sucessfully updated
-</div>
-<?php endif;?>
+<?php if (isset($success) && $success): ?>
+    <div class="alert alert-success">
+        Address was sucessfully updated
+    </div>
+<?php endif; ?>
 
 
 <?php $addressForm = ActiveForm::begin([
-    'action' => ['/site/update-address'],
-    'options'=>[
-        'data-pjax'=>1
+    'action' => ['/profile/update-address'],
+    'options' => [
+        'data-pjax' => 1
     ]
 ]); ?>
 <?= $addressForm->field($userAddress, 'address')->textInput() ?>
@@ -35,4 +32,3 @@ use yii\bootstrap4\ActiveForm;
 <?= $addressForm->field($userAddress, 'zipcode')->textInput() ?>
 <button class="btn btn-primary">Update</button>
 <?php ActiveForm::end(); ?>
-<?php \yii\widgets\Pjax::end() ?>

@@ -236,26 +236,4 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
-
-    public function actionProfile(){
-        $user = Yii::$app->user->identity;
-        $userAddress = $user->getAddress();
-        return $this->render('profile',[
-            'user'=>$user,
-            'userAddress'=>$userAddress
-        ]);
-    }
-
-    public function actionUpdateAddress(){
-        $user = Yii::$app->user->identity;
-        $userAddress = $user->getAddress();
-        $success = false;
-        if ($userAddress->load(Yii::$app->request->post()) && $userAddress->save()){
-            $success = true;
-        }
-        return $this->renderAjax('user_address',[
-            'userAddress'=>$userAddress,
-            'success'=>$success
-        ]);
-    }
 }
