@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 
-class ProfileController extends Controller
+class ProfileController extends \frontend\base\Controller
 {
 
     //the @ means the role authorised which here means logged in

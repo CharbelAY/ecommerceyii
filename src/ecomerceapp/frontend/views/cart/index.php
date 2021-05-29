@@ -33,7 +33,7 @@
                     <td><?= $cartItem['quantity'] ?></td>
                     <td><?= $cartItem['total_price'] ?></td>
                     <td>
-                        <?= \yii\helpers\Html::a('Delete', ['/cart/delete', 'id' => $cartItem['id']], [
+                        <?= \yii\helpers\Html::a('Delete', ['/cart/delete', 'id' => $cartItem['cart_item_id']], [
                             'class' => 'btn btn-outline-danger btn-small',
                             'data-method'=>'post',
                             'data-confirm'=>"Are you sure you want to remove this item from your cart"

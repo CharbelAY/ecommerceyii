@@ -12,7 +12,7 @@ use Yii;
  * @property int $quantity
  * @property int|null $created_by
  *
- * @property Products $product
+ * @property Product $product
  */
 class CartItem extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class CartItem extends \yii\db\ActiveRecord
         return [
             [['product_id', 'quantity'], 'required'],
             [['product_id', 'quantity', 'created_by'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
+            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -52,11 +52,11 @@ class CartItem extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Product]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\ProductsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\ProductQuery
      */
     public function getProduct()
     {
-        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
     /**
