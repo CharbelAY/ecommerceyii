@@ -9,6 +9,7 @@
         <h3>CART ITEMS</h3>
     </div>
     <div class="card-body p-0">
+        <?php if (!($cartItems===[])):?>
         <table class="table-hover table">
             <thead>
             <tr>
@@ -43,9 +44,12 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-
         <div class="card-body text-center">
             <a href="<?= \yii\helpers\Url::to(['/cart/checkout'])?>" class="btn btn-primary">Checkout</a>
         </div>
+        <?php else: ?>
+            <h3 class="text-center text-muted p-5">No items in cart</h3>
+        <?php endif;?>
+
     </div>
 </div>
