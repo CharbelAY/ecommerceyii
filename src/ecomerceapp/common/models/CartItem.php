@@ -84,4 +84,40 @@ class CartItem extends \yii\db\ActiveRecord
     {
         return new \common\models\query\CartItemQuery(get_called_class());
     }
+
+
+    public static function getCartItems(){
+        return CartItem::findBySql("
+            SELECT
+                c.product_id as id,
+                c.id as cart_item_id,
+                p.name,
+                p.price,
+                p.image,
+                p.description,
+                c.quantity,
+                c.quantity*p.price as total_price
+            FROM
+                cart_items c
+            LEFT JOIN products p on p.id = c.product_id
+            WHERE c.created_by = :userId", ['userId' => \Yii::$app->user->id])->asArray()->all();
+    }
+
+    public static function getTotalPrice(){
+        $totalPrice = 0;
+        if (Yii::$app->user->isGuest){
+            $cartItems= Yii::$app->session->get(CartItem::SESSION_KEY,[]);
+            foreach ($cartItems as $cartItem){
+                $totalPrice += $cartItem['quantity'] * $cartItem['price'];
+            }
+        }else{
+            $userId=Yii::$app->user->id;
+            $cartItemsOfUser = CartItem::find()->where(["created_by"=>$userId])->all();
+            foreach ($cartItemsOfUser as $cartItemOfUser){
+                /** @var CartItem $cartItemOfUser  */
+                $totalPrice += $cartItemOfUser->product->price * $cartItemOfUser->quantity;
+            }
+        }
+        return $totalPrice;
+    }
 }
