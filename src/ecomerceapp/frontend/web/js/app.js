@@ -19,6 +19,22 @@ $(function () {
             }
         });
     });
+
+    const quantityInputs = $('.item-quantity');
+    quantityInputs.change(ev => {
+        const $this = $(ev.target);
+        const newQuantity = $this.val();
+        const itemId = $this.closest('tr').data('id');
+        console.log(newQuantity);
+        $.ajax({
+            method: "POST",
+            url: $this.closest('tr').data('url'),
+            data: {itemId:itemId, quantity:newQuantity},
+            success: function (result) {
+                cartQuantity.text(result);
+            }
+        })
+    });
 });
 
 /*
