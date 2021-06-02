@@ -176,7 +176,6 @@ class CartController extends \frontend\base\Controller
         $orderAddress = new OrderAddresse();
 
         if (!\Yii::$app->user->isGuest){
-            /** @var User $user */
             $user = \Yii::$app->user->identity;
             $userAddress = $user->getAddress();
             $order->firstname = $user->firstname;
@@ -197,6 +196,14 @@ class CartController extends \frontend\base\Controller
                 'orderAddress'=>$orderAddress,
                 'cartItems'=>CartItem::getCartItems(),
                 'totalQuantity'=>$totalQuantity,
+                'totalPrice'=>CartItem::getTotalPrice()
+            ]);
+        }else{
+            return $this->render('checkout',[
+                'order'=>$order,
+                'orderAddress'=>$orderAddress,
+                'cartItems'=>CartItem::getCartItems(),
+                'totalQuantity'=>CartItem::getTotalQuantity(),
                 'totalPrice'=>CartItem::getTotalPrice()
             ]);
         }

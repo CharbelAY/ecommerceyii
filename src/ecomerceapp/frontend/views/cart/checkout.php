@@ -57,12 +57,13 @@ use yii\bootstrap4\ActiveForm;
                             <?= $totalPrice ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td> <?= \yii\helpers\Html::button('Checkout',['class'=>'btn btn-success']) ?> </td>
+                    </tr>
                 </table>
             </div>
         </div>
 
     </div>
 </div>
-
-<button class="btn btn-success">Continue</button>
 <?php ActiveForm::end(); ?>
